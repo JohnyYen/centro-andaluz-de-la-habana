@@ -18,6 +18,16 @@ export interface SharedArtist extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedIngredient extends Struct.ComponentSchema {
+  collectionName: 'components_shared_ingredients';
+  info: {
+    displayName: 'Ingredient';
+  };
+  attributes: {
+    name: Schema.Attribute.String;
+  };
+}
+
 export interface SharedMedia extends Struct.ComponentSchema {
   collectionName: 'components_shared_media';
   info: {
@@ -84,6 +94,7 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'shared.artist': SharedArtist;
+      'shared.ingredient': SharedIngredient;
       'shared.media': SharedMedia;
       'shared.quote': SharedQuote;
       'shared.rich-text': SharedRichText;

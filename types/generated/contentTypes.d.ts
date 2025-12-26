@@ -563,6 +563,48 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiDishDish extends Struct.CollectionTypeSchema {
+  collectionName: 'dishes';
+  info: {
+    displayName: 'Dish';
+    pluralName: 'dishes';
+    singularName: 'dish';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    cover_image: Schema.Attribute.Media<'images'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    currency: Schema.Attribute.Enumeration<['CUP', 'EUR']> &
+      Schema.Attribute.DefaultTo<'CUP'>;
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    dish_name: Schema.Attribute.UID<'name'>;
+    ingredients: Schema.Attribute.Component<'shared.ingredient', true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::dish.dish'> &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    price: Schema.Attribute.Decimal &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<0>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiEventTypeEventType extends Struct.CollectionTypeSchema {
   collectionName: 'event_types';
   info: {
@@ -1197,6 +1239,7 @@ declare module '@strapi/strapi' {
       'api::article.article': ApiArticleArticle;
       'api::author.author': ApiAuthorAuthor;
       'api::category.category': ApiCategoryCategory;
+      'api::dish.dish': ApiDishDish;
       'api::event-type.event-type': ApiEventTypeEventType;
       'api::event.event': ApiEventEvent;
       'api::global.global': ApiGlobalGlobal;

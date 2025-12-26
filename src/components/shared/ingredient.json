@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_shared_ingredients",
+  "info": {
+    "displayName": "Ingredient"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}
