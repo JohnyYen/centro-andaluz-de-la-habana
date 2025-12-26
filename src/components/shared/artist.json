@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_shared_artists",
+  "info": {
+    "displayName": "Artist"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": false
+    },
+    "photo": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "role": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "Solista,",
+        "Duo,",
+        "Grupo,",
+        "Compañia"
+      ]
+    }
+  },
+  "config": {}
+}
