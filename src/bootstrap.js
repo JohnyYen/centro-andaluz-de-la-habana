@@ -254,12 +254,27 @@ async function importSeedData() {
   await importAbout();
 }
 
+async function createRoleIfNotExists(roleType, roleName) {
+  const role = await strapi.query('plugin::users-permissions.role').findOne({
+    where: { type: roleType },
+  });
+
+  if (!role) {
+    await strapi.query('plugin::users-permissions.role').create({
+      data: {
+        name: roleName,
+        type: roleType,
+        permissions: {},
+      },
+    });
+  }
+}
+
 async function main() {
   const { createStrapi, compileStrapi } = require('@strapi/strapi');
 
   const appContext = await compileStrapi();
   const app = await createStrapi(appContext).load();
-
   app.log.level = 'error';
 
   await seedExampleApp();
