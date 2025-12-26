@@ -24,7 +24,9 @@ export interface SharedIngredient extends Struct.ComponentSchema {
     displayName: 'Ingredient';
   };
   attributes: {
-    name: Schema.Attribute.String;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
   };
 }
 
