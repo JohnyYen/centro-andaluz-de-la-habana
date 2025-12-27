@@ -254,7 +254,7 @@ async function importSeedData() {
   await importAbout();
 }
 
-async function createRoleIfNotExists(roleType, roleName) {
+async function createRoleIfNotExists(roleType, roleName, permissions = {}) {
   const role = await strapi.query('plugin::users-permissions.role').findOne({
     where: { type: roleType },
   });
@@ -264,7 +264,7 @@ async function createRoleIfNotExists(roleType, roleName) {
       data: {
         name: roleName,
         type: roleType,
-        permissions: {},
+        permissions: permissions,
       },
     });
   }
